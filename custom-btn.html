@@ -1,0 +1,99 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="bower_components/iron-data-table/iron-data-table.html">
+<dom-module id="custom-btn">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <button>static txt</button>
+    <iron-data-table items="[[data]]" id="dt">
+      <data-table-column name="First Name">
+        <template>[[item.fname]]</template>
+      </data-table-column>
+      <data-table-column name="Last Name">
+        <template>[[item.lname]]</template>
+      </data-table-column>
+      <data-table-column name="Edit">
+        <template><paper-button on-tap="clk">edit</paper-button></template>
+      </data-table-column>
+    </iron-data-table>
+    <button on-tap="opendial">opendial</button>
+    <paper-dialog id="dial">
+      <h2 on-click="print">Header</h2>
+      <iron-form id="myForm">
+        <p>[[formDat.fname]]</p>
+        <paper-input label="fname" value="{{formDat.fname}}"></paper-input>
+        <paper-input label="lname" value="{{formDat.lname}}"></paper-input>
+      </iron-form>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-confirm>Accept</paper-button>
+      </div>
+    </paper-dialog>
+  </template>
+  <script>
+    (function(Polymer){
+      Polymer({
+        is: 'custom-btn',
+        properties: {
+          formDat: {
+            type: Object,
+            value: {
+              fname: 'test',
+              lname: 'test'
+            }
+          }
+        },
+        ready: function() {
+          this.data = [{
+              id: "1",
+              fname: "as",
+              lname: "sasa"
+          }, {
+              id: "2",
+              fname: "asda",
+              lname: "sdxc"
+          }, {
+              id: "3",
+              fname: "cv",
+              lname: "vcb"
+          }, {
+              id: "4",
+              fname: "df",
+              lname: "cweew"
+          }];
+        },
+        stringify: function(e) {
+          return JSON.stringify(e);
+        },
+        clk: function(e) {
+          var temp = {
+            fname: e.model.item.fname,
+            lname: e.model.item.lname,
+            id: e.model.item.id
+          };
+          this.set('formDat', temp);
+          var dialog = document.getElementById('dial');
+          dialog.open();
+          console.log(this.formDat);
+        },
+        print: function() {
+          console.log(this.formDat);
+        },
+        opendial: function() {
+          var temp = {
+            fname: '',
+            lname: ''
+          };
+          this.set('formDat', temp);
+          var dialog = document.getElementById('dial');
+          dialog.open();
+          console.log(this.formDat);
+        }
+      });
+    })(Polymer);
+  </script>
+</dom-module>
