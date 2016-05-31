@@ -19,6 +19,11 @@
     "paper-button": "PolymerElements/paper-button#^1.0.12",
     "iron-form": "^1.0.16",
     "paper-input": "^1.1.11",
-    "paper-dialog": "^1.0.4"
+    "paper-dialog": "^1.0.4",
+    "paper-dropdown-menu": "^1.2.1",
+    "paper-item": "^1.2.1",
+    "paper-listbox": "^1.1.2",
+    "iron-menu-behavior": "PolymerElements/iron-menu-behavior#^1.1.7",
+    "paper-menu": "^1.2.2"
   }
 }

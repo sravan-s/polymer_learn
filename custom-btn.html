@@ -1,6 +1,12 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
 <link rel="import" href="bower_components/iron-data-table/iron-data-table.html">
+<link rel="import" href="bower_components/paper-menu/paper-menu.html">
+
 <dom-module id="custom-btn">
   <template>
     <style>
@@ -8,7 +14,16 @@
         display: block;
       }
     </style>
-    <button>static txt</button>
+    <paper-dropdown-menu label="Title" selected-item="{{selectedItem}}" selected-item-label="{{}}">
+        <paper-menu class="dropdown-content" attr-for-selected="myVal" selected="{{formDat.selected}}">
+            <paper-item myVal="P">A</paper-item>
+            <paper-item myVal="Q">B</paper-item>
+            <paper-item myVal="R">C</paper-item>
+        </paper-menu>
+    </paper-dropdown-menu>
+
+    </paper-dropdown-menu>
+    <button on-tap="kl">static txt</button>
     <iron-data-table items="[[data]]" id="dt">
       <data-table-column name="First Name">
         <template>[[item.fname]]</template>
@@ -33,6 +48,7 @@
         <paper-button dialog-confirm>Accept</paper-button>
       </div>
     </paper-dialog>
+
   </template>
   <script>
     (function(Polymer){
@@ -43,7 +59,8 @@
             type: Object,
             value: {
               fname: 'test',
-              lname: 'test'
+              lname: 'test',
+              selected: "Q"
             }
           }
         },
@@ -65,6 +82,9 @@
               fname: "df",
               lname: "cweew"
           }];
+        },
+        kl: function() {
+          console.log(this.formDat);
         },
         stringify: function(e) {
           return JSON.stringify(e);
